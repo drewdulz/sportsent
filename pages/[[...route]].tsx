@@ -1,14 +1,19 @@
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 
 export default function Main() {
   const [secondsRemaining, setSecondsRemaining] = useState(5)
+
+  const router = useRouter()
+  const { route = [] } = router.query
+  const desiredRoute = route.join('/')
 
   useEffect(() => {
     const timeoutID = setTimeout(() => {
       if (secondsRemaining > 0) {
         setSecondsRemaining(secondsRemaining - 1)
       } else {
-        window.location.href = 'https://www.sportsnet.ca'
+        window.location.href = `https://www.sportsnet.ca/${desiredRoute}`
       }
     }, 1000)
 
