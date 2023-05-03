@@ -9,23 +9,21 @@ export default function Main() {
 
   const desiredRoute = route.join('/')
 
-  // query params?
-  // add entire url to UI
-  //
+  // Take advantage of SSR
+  // Make entire page configurable
 
   useEffect(() => {
-    const timeoutID = setTimeout(() => {
-      if (secondsRemaining > 0) {
-        setSecondsRemaining(secondsRemaining - 1)
-      } else {
-        window.location.href = `https://www.sportsnet.ca/${desiredRoute}`
-      }
-    }, 1000)
-
-    return () => {
-      clearTimeout(timeoutID)
-    }
+    const timeoutID = setTimeout(countdown, 1000)
+    return () => clearTimeout(timeoutID)
   }, [secondsRemaining])
+
+  const countdown = () => {
+    if (secondsRemaining > 0) {
+      setSecondsRemaining(secondsRemaining - 1)
+    } else {
+      window.location.href = `https://www.sportsnet.ca/${desiredRoute}`
+    }
+  }
 
   return (
     <main>
