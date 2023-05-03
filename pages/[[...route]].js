@@ -5,9 +5,13 @@ export default function Main() {
   const [secondsRemaining, setSecondsRemaining] = useState(5)
 
   const router = useRouter()
-  const route: string[] = (router?.query?.route as string[]) || []
+  const route = router?.query?.route || []
 
-  const desiredRoute = (route as string[]).join('/')
+  const desiredRoute = route.join('/')
+
+  // query params?
+  // add entire url to UI
+  //
 
   useEffect(() => {
     const timeoutID = setTimeout(() => {
